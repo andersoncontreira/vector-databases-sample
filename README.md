@@ -14,23 +14,27 @@ São a espinha dorsal de aplicações modernas como:
 
 ## Bancos de dados estudados
 
-| Banco de dados       | Tipo               | Status    | Pasta                  |
-|----------------------|--------------------|-----------|------------------------|
-| ChromaDB             | Embarcado / local  | Concluído | `chromadb_examples/`   |
-| PostgreSQL+pgvector  | Relacional+vetor   | A estudar | `pgvector_examples/`   |
-| Pinecone             | Cloud gerenciado   | A estudar | `pinecone_examples/`   |
-| Weaviate             | Distribuído        | A estudar | `weaviate_examples/`   |
-| Qdrant               | Distribuído        | A estudar | `qdrant_examples/`     |
+| Banco de dados       | Tipo                  | Status    | Pasta                    |
+|----------------------|-----------------------|-----------|--------------------------|
+| ChromaDB             | Embarcado / local     | Concluído | `chromadb_examples/`     |
+| PostgreSQL+pgvector  | Relacional+vetor      | A estudar | `pgvector_examples/`     |
+| Pinecone             | Cloud gerenciado      | A estudar | `pinecone_examples/`     |
+| Weaviate             | Distribuído           | A estudar | `weaviate_examples/`     |
+| Qdrant               | Distribuído           | A estudar | `qdrant_examples/`       |
+| Amazon S3 Vectors    | Cloud AWS (serverless)| A estudar | `s3vectors_examples/`    |
+| Amazon OpenSearch    | Cloud AWS / self-hosted | A estudar | `opensearch_examples/` |
 
 ## Comparativo geral
 
-| Banco de dados      | Hospedagem          | Escala        | Ideal para                                             |
-|---------------------|---------------------|---------------|--------------------------------------------------------|
-| ChromaDB            | Local / self-hosted | Pequena/média | Prototipagem, uso local, projetos acadêmicos           |
-| PostgreSQL+pgvector | Self-hosted / cloud | Média/grande  | Quem já usa Postgres e quer evitar nova infraestrutura |
-| Pinecone            | Cloud gerenciado    | Grande        | Produção sem ops, alta disponibilidade                 |
-| Weaviate            | Self-hosted / cloud | Grande        | Busca semântica rica, GraphQL, multimodal              |
-| Qdrant              | Self-hosted / cloud | Grande        | Alta performance, filtragem avançada, Rust-based       |
+| Banco de dados      | Hospedagem              | Escala        | Ideal para                                             |
+|---------------------|-------------------------|---------------|--------------------------------------------------------|
+| ChromaDB            | Local / self-hosted     | Pequena/média | Prototipagem, uso local, projetos acadêmicos           |
+| PostgreSQL+pgvector | Self-hosted / cloud     | Média/grande  | Quem já usa Postgres e quer evitar nova infraestrutura |
+| Pinecone            | Cloud gerenciado        | Grande        | Produção sem ops, alta disponibilidade                 |
+| Weaviate            | Self-hosted / cloud     | Grande        | Busca semântica rica, GraphQL, multimodal              |
+| Qdrant              | Self-hosted / cloud     | Grande        | Alta performance, filtragem avançada, Rust-based       |
+| Amazon S3 Vectors   | AWS serverless          | Muito grande  | Armazenamento durável de vetores, pipelines batch, AWS |
+| Amazon OpenSearch   | AWS gerenciado / Docker | Grande        | Busca híbrida (vetorial + full-text), ecossistema AWS  |
 
 ## Estrutura do projeto
 
@@ -42,6 +46,8 @@ vector-databases-sample/
 ├── pinecone_examples/         # Exemplos com Pinecone
 ├── weaviate_examples/         # Exemplos com Weaviate
 ├── qdrant_examples/           # Exemplos com Qdrant
+├── s3vectors_examples/        # Exemplos com Amazon S3 Vectors
+├── opensearch_examples/       # Exemplos com Amazon OpenSearch (k-NN)
 └── scripts/                   # Scripts utilitários gerais
 ```
 
@@ -50,16 +56,19 @@ vector-databases-sample/
 A ordem abaixo foi pensada para ir do mais simples ao mais complexo, construindo conhecimento progressivamente:
 
 ```
-1. ChromaDB        → conceitos base, API simples, uso local
-2. pgvector        → integração com SQL, extensão do Postgres
-3. Qdrant          → performance, filtros avançados, client REST/gRPC
-4. Weaviate        → busca semântica avançada, schema, GraphQL
-5. Pinecone        → produção em nuvem, serverless, alta escala
+1. ChromaDB          → conceitos base, API simples, uso local
+2. pgvector          → integração com SQL, extensão do Postgres
+3. Qdrant            → performance, filtros avançados, client REST/gRPC
+4. Weaviate          → busca semântica avançada, schema, GraphQL
+5. Pinecone          → produção em nuvem, serverless, alta escala
+6. Amazon S3 Vectors → armazenamento vetorial serverless na AWS, integração com Bedrock
+7. Amazon OpenSearch → busca híbrida (vetorial + full-text), ecossistema AWS
 ```
 
 ## Pré-requisitos gerais
 
 - Python 3.11+
-- Docker (para pgvector, Qdrant e Weaviate)
+- Docker (para pgvector, Qdrant, Weaviate e OpenSearch)
 - Conta na Pinecone (gratuita para estudo)
+- Conta AWS com acesso ao S3, Bedrock e OpenSearch Service (para os exemplos AWS)
 - Familiaridade básica com o conceito de embeddings

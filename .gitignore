@@ -16,3 +16,4 @@ __pycache__/
 
 /db/chroma_db_bedrock_sample/chroma.sqlite3
 /db/chroma_db_openai_sample/chroma.sqlite3
+/db/
