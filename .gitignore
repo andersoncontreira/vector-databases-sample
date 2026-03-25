@@ -7,5 +7,10 @@ chromadb/venv/
 .env/
 __pycache__/
 *.pyc
-/chromadb_examples/db/chroma_db_sample/
+
 /chromadb_examples/.env
+/chromadb_examples/db/chroma_db_openai_sample/
+/chromadb_examples/db/chroma_db_sample/
+/chromadb_examples/db/*
+
+
