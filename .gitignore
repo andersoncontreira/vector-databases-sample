@@ -8,3 +8,4 @@ chromadb/venv/
 __pycache__/
 *.pyc
 /chromadb_examples/db/chroma_db_sample/
+/chromadb_examples/.env
