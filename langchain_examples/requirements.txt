@@ -2,4 +2,5 @@ langchain
 langchain-openai
 langchain-community
 langchain-chroma
+langchain-pinecone
 pypdf
