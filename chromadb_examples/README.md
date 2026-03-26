@@ -29,15 +29,25 @@ O ChromaDB é recomendado nos seguintes cenários:
 | Alta escala (bilhões de vetores)    | Limitado  | Prefira Pinecone ou Weaviate       |
 | Deploy em produção gerenciado       | Limitado  | Prefira soluções cloud             |
 
-## Estrutura dos exemplos
+## Estrutura dos exercícios
+
+Os arquivos seguem a convenção `exNN_descricao.py`, ordenados pela progressão natural do estudo.
 
 ```
 chromadb_examples/
-├── app.py             # Exemplo básico: criação de coleção, inserção e busca por similaridade
-├── app_v2.py          # Exemplo com função de embedding explícita (DefaultEmbeddingFunction)
-├── chromadb_emb.py    # Demonstração de como gerar embeddings com o ChromaDB
+├── ex01_in_memory_basic.py          # ChromaDB in-memory: coleção, upsert e busca simples
+├── ex02_embedding_visualization.py  # Visualizar o vetor gerado pelo DefaultEmbeddingFunction
+├── ex03_in_memory_explicit_ef.py    # In-memory com EmbeddingFunction explícita
+├── ex04_persistent_client.py        # PersistentClient: dados salvos em disco
+├── ex05_raw_openai_embedding.py     # Gerar embedding direto pela API OpenAI (sem ChromaDB)
+├── ex06_persistent_openai_ef.py     # ChromaDB persistente com OpenAI como embedding function
+├── ex07_persistent_bedrock_ef.py    # ChromaDB persistente com Amazon Bedrock como embedding function
+├── ex08_rag_indexing.py             # Pipeline RAG: leitura de PDFs, chunking e indexação
+├── ex09_rag_query.py                # Consulta sobre a coleção criada no ex08
+├── ex10_rag_with_llm_response.py    # RAG completo: retrieval + resposta gerada pela LLM
+├── data_utils.py                    # Utilitários: leitura de PDF, chunking, embeddings, geração de resposta
 └── scripts/
-    └── init.sh        # Script de inicialização do ambiente virtual e instalação de dependências
+    └── init.sh                      # Script de inicialização do ambiente virtual e dependências
 ```
 
 ## Coleções (Collections)
@@ -59,7 +69,7 @@ Cada registro dentro de uma coleção é composto pelos seguintes campos:
 
 ### Coleções criadas nos exemplos
 
-#### `test_collection` — usada em `app.py` e `app_v2.py`
+#### `test_collection` — usada em `ex01_in_memory_basic.py` e `ex03_in_memory_explicit_ef.py`
 
 Coleção criada para demonstrar inserção e busca por similaridade semântica. Armazena frases simples em inglês e permite consultar quais documentos são semanticamente mais próximos de um texto de busca.
 
@@ -86,12 +96,12 @@ Result 2: Document ID: doc4, Distance: <médio> => Is this the first document?
 Result 3: Document ID: doc2, Distance: <maior> => This document is the second document.
 ```
 
-### Diferença entre `app.py` e `app_v2.py`
+### Diferença entre `ex01` e `ex03`
 
-| Aspecto                    | `app.py`                         | `app_v2.py`                                 |
-|----------------------------|----------------------------------|---------------------------------------------|
-| Embedding function         | Implícita (padrão do ChromaDB)   | Explícita (`DefaultEmbeddingFunction`)      |
-| Controle sobre o modelo    | Nenhum                           | Permite trocar por outro modelo facilmente  |
+| Aspecto                      | `ex01_in_memory_basic.py`      | `ex03_in_memory_explicit_ef.py`             |
+|------------------------------|--------------------------------|---------------------------------------------|
+| Embedding function           | Implícita (padrão do ChromaDB) | Explícita (`DefaultEmbeddingFunction`)      |
+| Controle sobre o modelo      | Nenhum                         | Permite trocar por outro modelo facilmente  |
 | Exemplo de integração futura | —                              | Comentário com `AmazonBedrockEmbeddingFunction` |
 
 ## Como executar
@@ -104,17 +114,38 @@ bash scripts/init.sh
 source venv/bin/activate
 ```
 
-### 2. Executar os exemplos
+### 2. Executar os exercícios
 
 ```bash
-# Exemplo básico
-python app.py
+# Ex01 - ChromaDB in-memory básico
+python ex01_in_memory_basic.py
 
-# Exemplo com embedding function explícita
-python app_v2.py
+# Ex02 - Visualizar embedding gerado
+python ex02_embedding_visualization.py
 
-# Visualizar embedding gerado
-python chromadb_emb.py
+# Ex03 - In-memory com EmbeddingFunction explícita
+python ex03_in_memory_explicit_ef.py
+
+# Ex04 - Cliente persistente (dados em disco)
+python ex04_persistent_client.py
+
+# Ex05 - Embedding raw via OpenAI API
+python ex05_raw_openai_embedding.py
+
+# Ex06 - ChromaDB persistente com OpenAI
+python ex06_persistent_openai_ef.py
+
+# Ex07 - ChromaDB persistente com Bedrock
+python ex07_persistent_bedrock_ef.py
+
+# Ex08 - RAG: indexar documentos (rode antes do ex09 e ex10)
+python ex08_rag_indexing.py
+
+# Ex09 - RAG: consultar a coleção indexada
+python ex09_rag_query.py
+
+# Ex10 - RAG completo com resposta da LLM
+python ex10_rag_with_llm_response.py
 ```
 
 ## Dependências

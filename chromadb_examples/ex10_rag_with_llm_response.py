@@ -6,7 +6,7 @@ from openai import OpenAI
 
 load_dotenv()
 
-from chromadb_examples.data_utils import generate_model_response
+from data_utils import generate_model_response
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
 openai_client = OpenAI(api_key=openai_api_key)

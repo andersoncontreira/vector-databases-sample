@@ -6,8 +6,7 @@ import chromadb
 from openai import OpenAI
 from chromadb.utils import embedding_functions
 
-from chromadb_examples.data_utils import split_text, get_openai_embedding
-from data_utils import load_data_from_directory
+from data_utils import split_text, get_openai_embedding, load_data_from_directory
 
 # pip install pypdf
 
