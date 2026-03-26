@@ -4,3 +4,5 @@ langchain-community
 langchain-chroma
 langchain-pinecone
 pypdf
+langchain-redis
+redis
