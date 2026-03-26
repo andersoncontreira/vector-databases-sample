@@ -22,38 +22,19 @@ collection_name = "articles"
 
 collection = client.get_or_create_collection(name=collection_name, embedding_function=openai_ef)
 
-documents = load_data_from_directory("./data/articles")
-# print(documents)
-print (f"Number of documents: {len(documents)}")
-
-print("Chunking documents...")
-chunked_documents = []
-for doc in documents:
-    chunks = split_text(doc["text"])
-
-    for i, chunk in enumerate(chunks):
-        chunked_documents.append({"id": doc["id"], "text": chunk, "chunk_id": i})
-
-print("Number of chunked documents: ", len(chunked_documents))
-
-print("Getting embeddings for chunked documents...")
-for doc in chunked_documents:
-    text = doc["text"]
-    embedding = get_openai_embedding(text, open_ai_client=openai_client, model="text-embedding-3-small")
-    doc["embedding"] = embedding
-
-print("Upserting chunked documents...")
-for doc in chunked_documents:
-    collection.upsert(documents=[doc["text"]], ids=[doc["id"]], embeddings=[doc["embedding"]])
-
 
 def query_documents(query):
     query_text = f"Find information about {query}"
-
     return collection.query(query_texts=[query_text], n_results=3)
 
 
 results = query_documents("Carreira de Desenvolvedor")
+
+for doc in results['documents'][0]:
+    print(f"doc: {doc}")
+
+
+results = query_documents("Plano de carreira")
 
 for doc in results['documents'][0]:
     print(f"doc: {doc}")
