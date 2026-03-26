@@ -11,7 +11,7 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 # default_ef = embedding_functions.DefaultEmbeddingFunction()
 openai_ef = embedding_functions.OpenAIEmbeddingFunction(api_key=openai_api_key, model_name="text-embedding-3-small")
 
-chromadb_client = chromadb.PersistentClient(path="./db/chroma_db_openai_sample")
+chromadb_client = chromadb.PersistentClient(path="../db/chroma_db_openai_sample")
 
 collection = chromadb_client.get_or_create_collection(name="my_store", embedding_function=openai_ef)
 

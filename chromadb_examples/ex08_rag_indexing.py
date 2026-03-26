@@ -16,12 +16,12 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 openai_client = OpenAI(api_key=openai_api_key)
 openai_ef = embedding_functions.OpenAIEmbeddingFunction(api_key=openai_api_key, model_name="text-embedding-3-small")
 
-client = chromadb.PersistentClient(path="./db/chroma_db_llm_sample")
+client = chromadb.PersistentClient(path="../db/chroma_db_llm_sample")
 collection_name = "articles"
 
 collection = client.get_or_create_collection(name=collection_name, embedding_function=openai_ef)
 
-documents = load_data_from_directory("./data/articles")
+documents = load_data_from_directory("../data/articles")
 # print(documents)
 print (f"Number of documents: {len(documents)}")
 

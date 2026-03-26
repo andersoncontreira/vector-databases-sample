@@ -51,7 +51,7 @@ bedrock_profile = os.getenv("BEDROCK_PROFILE", "newstacktrace-dev")
 
 bedrock_ef = BedrockEmbeddingFunction(model_id=bedrock_model_id, region_name=bedrock_region, profile_name=bedrock_profile)
 
-chromadb_client = chromadb.PersistentClient(path="./db/chroma_db_bedrock_sample")
+chromadb_client = chromadb.PersistentClient(path="../db/chroma_db_bedrock_sample")
 
 # Ajustar a tipagem para ignorar o warning do tipo customizado
 collection = chromadb_client.get_or_create_collection(name="my_store", embedding_function=bedrock_ef)  # type: ignore

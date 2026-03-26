@@ -4,7 +4,7 @@ from chromadb.utils import embedding_functions
 
 default_ef = embedding_functions.DefaultEmbeddingFunction()
 
-chromadb_client = chromadb.PersistentClient(path="./db/chroma_db_sample")
+chromadb_client = chromadb.PersistentClient(path="../db/chroma_db_sample")
 
 collection = chromadb_client.get_or_create_collection(name="my_store", embedding_function=default_ef)
 
